@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  GROUP NAME: ______________________________
+  GROUP MEMBERS NAME AND ID:
+    1. Bitanya Tigabe              (ID: 0248/15)
+    2. Mohammed Elias              (ID: 0766/15)
+    3. Awel Hussen                 (ID: 0178/15)
+    4. Raeey Nega                  (ID: 5307/16)
+    5. Hamdi Mohammes              (ID: 0505/15)
+    6. Heyru Jemal                 (ID: 0546/15)
+  Title of the program: Experiment 16 - Apache Ant build file that compiles
+                         a servlet and deploys it to Tomcat 5
+  Output (compilation): BUILD SUCCESSFUL; servlet deployed to
+                         ${tomcat.home}/webapps/YourApp
+-->
+<project name="SimpleServletBuild" default="deploy" basedir=".">
+    <!-- ===================== -->
+    <!-- Project configuration -->
+    <!-- ===================== -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="web.dir" value="web"/>
+    <property name="tomcat.home" value="C:/tomcat50-jwsdp"/>
+    <property name="deploy.dir" value="${tomcat.home}/webapps/YourApp"/>
+
+    <!-- Classpath includes servlet API -->
+    <path id="compile.classpath">
+        <pathelement location="${tomcat.home}/common/lib/servlet-api.jar"/>
+    </path>
+    <!-- ===================== -->
+    <!-- Clean build directory -->
+    <!-- ===================== -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+    <!-- ===================== -->
+    <!-- Compile servlet source -->
+    <!-- ===================== -->
+    <target name="compile" depends="clean">
+        <mkdir dir="${build.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false"
+               classpathref="compile.classpath"/>
+    </target>
+    <!-- ===================== -->
+    <!-- Prepare WAR structure -->
+    <!-- ===================== -->
+    <target name="prepare" depends="compile">
+        <mkdir dir="${build.dir}/WEB-INF/classes"/>
+        <copy todir="${build.dir}/WEB-INF/classes">
+            <fileset dir="${build.dir}"/>
+        </copy>
+        <copy todir="${build.dir}/WEB-INF">
+            <fileset dir="${web.dir}/WEB-INF"/>
+        </copy>
+    </target>
+    <!-- ===================== -->
+    <!-- Deploy to Tomcat -->
+    <!-- ===================== -->
+    <target name="deploy" depends="prepare">
+        <mkdir dir="${deploy.dir}"/>
+        <copy todir="${deploy.dir}">
+            <fileset dir="${build.dir}"/>
+        </copy>
+        <echo message="Servlet deployed to ${deploy.dir}. Restart Tomcat to apply changes."/>
+    </target>
+</project>

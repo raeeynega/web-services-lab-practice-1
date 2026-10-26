@@ -1,0 +1,12 @@
+# Generated build output
+Experiment16/build/
+Experiment16/dist/
+*.class
+*.war
+
+# Source lab PDF (not part of the deliverable)
+LAB PRACTICE 1 GUIDE AND EXPERIMENTS-7.pdf
+
+# OS/editor files
+.DS_Store
+Thumbs.db

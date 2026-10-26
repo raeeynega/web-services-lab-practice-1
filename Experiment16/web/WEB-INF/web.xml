@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  GROUP NAME: ______________________________
+  GROUP MEMBERS NAME AND ID:
+    1. Bitanya Tigabe              (ID: 0248/15)
+    2. Mohammed Elias              (ID: 0766/15)
+    3. Awel Hussen                 (ID: 0178/15)
+    4. Raeey Nega                  (ID: 5307/16)
+    5. Hamdi Mohammes              (ID: 0505/15)
+    6. Heyru Jemal                 (ID: 0546/15)
+  Title of the program: Deployment descriptor for MyServlet (Experiment 16)
+  Output (compilation): Parsed and deployed successfully by Tomcat 5
+-->
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+
+    <display-name>Simple Servlet Application</display-name>
+
+    <servlet>
+        <servlet-name>MyServlet</servlet-name>
+        <servlet-class>com.example.MyServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MyServlet</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+
+</web-app>
